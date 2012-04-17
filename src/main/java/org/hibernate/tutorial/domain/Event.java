@@ -1,6 +1,9 @@
 package org.hibernate.tutorial.domain;
 
+import org.hibernate.engine.internal.Cascade;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -10,6 +13,12 @@ public class Event {
 
     private String title;
     private Date date;
+
+     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+     mappedBy = "events",
+     targetEntity = Person.class
+     )
+     private Collection<Person> persons;
 
     public Event() {}
 
